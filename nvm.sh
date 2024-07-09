@@ -3725,7 +3725,8 @@ nvm() {
         #   return 11
         # fi
         if [ "_$npm_config_prefix" != "_" ]; then
-          export $__npm_config_prefix_backup=$npm_config_prefix
+          export __npm_config_prefix_backup=$npm_config_prefix
+          unset npm_config_prefix
         fi
       else
         if [ "_$__npm_config_prefix_backup" != "_" ]; then
