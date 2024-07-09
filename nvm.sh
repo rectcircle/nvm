@@ -3653,6 +3653,9 @@ nvm() {
       if [ "_${VERSION}" = '_system' ]; then
         if nvm_has_system_node && nvm deactivate "${NVM_SILENT_ARG-}" >/dev/null 2>&1; then
           if [ "${NVM_SILENT:-0}" -ne 1 ]; then
+            if [ "_$__npm_config_prefix_backup" != "_" ]; then
+              export npm_config_prefix=$__npm_config_prefix_backup
+            fi
             nvm_echo "Now using system version of node: $(node -v 2>/dev/null)$(nvm_print_npm_version)"
           fi
           return
