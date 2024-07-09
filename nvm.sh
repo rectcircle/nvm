@@ -3721,8 +3721,15 @@ nvm() {
         if [ "${NVM_SILENT:-0}" -eq 1 ]; then
           NVM_USE_CMD="${NVM_USE_CMD} --silent"
         fi
-        if ! nvm_die_on_prefix "${NVM_DELETE_PREFIX}" "${NVM_USE_CMD}" "${NVM_VERSION_DIR}"; then
-          return 11
+        # if ! nvm_die_on_prefix "${NVM_DELETE_PREFIX}" "${NVM_USE_CMD}" "${NVM_VERSION_DIR}"; then
+        #   return 11
+        # fi
+        if [ "_$npm_config_prefix" != "_" ]; then
+          export $__npm_config_prefix_backup=$npm_config_prefix
+        fi
+      else
+        if [ "_$__npm_config_prefix_backup" != "_" ]; then
+          export npm_config_prefix=$__npm_config_prefix_backup
         fi
       fi
       if [ -n "${NVM_USE_OUTPUT-}" ] && [ "${NVM_SILENT:-0}" -ne 1 ]; then
