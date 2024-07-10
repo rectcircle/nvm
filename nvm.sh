@@ -4355,6 +4355,8 @@ nvm_install_default_packages() {
     nvm_err "Failed installing default packages. Please check if your default-packages file or a package in it has problems!"
     return 1
   fi
+
+  nvm_is_zsh && rehash
 }
 
 nvm_supports_xz() {
